@@ -1,0 +1,18 @@
+
+extend type Mutation {
+    
+    Login(email: String!, password: String! ): String!
+
+    sendmailpassword(email: String!): String!
+
+    Logout: logoutOutput! @guard
+
+    setpassword(
+        password:String! @rules(apply: ["min:8"]),
+        confirmpassword:String! @rules(apply: ["min:8"])
+    ):String! @guard
+}
+
+type logoutOutput{
+    message : String!
+}

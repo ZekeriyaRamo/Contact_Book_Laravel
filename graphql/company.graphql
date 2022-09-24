@@ -1,0 +1,28 @@
+extend type Query {
+    mycompanyprofile:Company @guard
+}
+
+type Company {
+    id:String
+    name:String
+    vat_num:String
+    street:String
+    street2:String
+    city:String
+    state:String
+    zip:String
+    country:String
+}
+
+extend type Mutation {
+     updatecompanyprofile(
+        name:String
+        vat_num:String
+        street:String
+        street2:String
+        city:String
+        state:String
+        zip:String
+        country:String
+    ):String! @guard
+}

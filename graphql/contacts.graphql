@@ -1,0 +1,81 @@
+
+extend type Mutation {
+    # add and romove
+    makefavorite(contact_id:ID!): [Favorite!]! @guard
+    createcontact(
+        image: String,
+        first_name: String! @rules(apply:["required"]),
+        last_name: String! @rules(apply:["required"]),
+        email: String  @rules(apply:["email","unique:contacts"]),
+        phone: String! @rules(apply:["required"]),
+        email2: String @rules(apply: ["email","unique:contacts"]),
+        mobile: String,
+        address1: String,
+        address2: String,
+    ):String @guard
+
+    updatecontact(
+        contact_id:ID!
+        image:String
+        first_name:String 
+        last_name:String 
+        email:String 
+        phone:String 
+        status:String
+        email2:String 
+        mobile:String
+        address1:String
+        address2:String
+        
+    ):String! @guard
+    
+    deletecontact(
+        id:[ID!]!
+    ):String @guard
+
+    exportpdf:String! @guard
+
+}
+
+extend type Query {
+    getcontacts(search:String,page:Int):[Contactlist!]!  @guard
+    getcontactprofile(id:ID!):Contact! @guard
+    getfavorite: [Favorite!]! @guard
+    contactsCount: Int! @guard
+    Getactivecontacts: Int! @guard
+    Getinactivecontacts: Int! @guard
+    Getwithemailcontacts: Int! @guard
+    Getwithoutemailcontacts: Int! @guard
+    contacts:[Contact] @all @guard
+}
+
+type Contactlist {
+    user_id:ID,
+    id:ID,
+    image:String,
+    first_name:String,
+    last_name:String,
+    email:String,
+    phone:String,
+    status:String,
+    
+}
+
+type Contact {
+    id:ID
+    image:String
+    first_name:String
+    last_name:String
+    email:String
+    phone:String
+    status:String
+    email2:String
+    mobile:String
+    address1:String
+    address2:String
+    user_id:ID,
+}
+type Favorite {
+    id:ID
+    contact_id:Int
+}

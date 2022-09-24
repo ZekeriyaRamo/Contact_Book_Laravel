@@ -1,0 +1,57 @@
+scalar DateTime @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\DateTime")
+
+extend type Query {
+    users: [User!]! @all
+    getusers(search:String,page:Int):[User!]! @guard
+    userprofilbyid(id:ID!):User! @guard
+    getname: User @auth @guard 
+    getuserid:String!  @guard 
+    usercount(search:String):String! @guard 
+    getmyprofile:User!@auth
+    userscount: Int @guard
+    Getuserfullname(id: ID!): User! @guard
+}
+extend type Mutation {
+    inviteuser(
+        first_name:String!
+        last_name:String!
+        email:String! @rules(apply: ["unique:users,email"]),
+        phone:String!@rules(apply: ["unique:users"])
+        role:String!
+    ):InviteuserOutup! @guard 
+    updateuser(
+        id:ID!
+        first_name:String
+        last_name:String
+        email:String 
+        phone:String
+        status:String
+        role:String
+    ):String! @guard
+
+    updatemyprofile(  
+        first_name:String
+        last_name:String
+        email:String 
+        phone:String
+    ):String! @guard
+    deleteuser(id:[ID!]!):String @guard
+}
+type User{
+    id:ID!
+    first_name:String!
+    last_name:String!
+    email:String!
+    phone:String!@rules(apply: ["unique:users"])
+    type:String!
+    status:String!
+   
+} 
+type InviteuserOutup{
+    message: String!
+    token: String!
+}
+type userName{
+    first_name: String!
+    last_name: String!
+}

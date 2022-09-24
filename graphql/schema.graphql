@@ -1,0 +1,6 @@
+#import contacts.graphql
+#import users.graphql
+#import auth.graphql
+#import register.graphql
+#import company.graphql
+#import activity.graphql

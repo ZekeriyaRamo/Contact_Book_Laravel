@@ -1,0 +1,18 @@
+scalar DateTime @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\DateTime")
+
+extend type Query {
+    Getactivities(page:Int!,):[Activity]!  @guard
+    getlastactivities:[Activity!]! @guard
+    getactivitiescount:String! @guard
+    
+}
+
+type Activity {
+    id:ID!
+    title:String!
+    date:String!
+    user_id:ID!
+    created_at:String!
+    username:String!
+    contactname :String!
+}
